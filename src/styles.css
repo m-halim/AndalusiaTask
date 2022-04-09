@@ -1,0 +1,17 @@
+/* You can add global styles to this file, and also import other style files */
+@import '@angular/cdk/overlay-prebuilt.css';
+
+body{background-color: #eff7ff;}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.form-control:focus{
+    border-color: transparent;
+    box-shadow: none;
+}
+
+.mat-table  thead{ background-color: #d7e4f1;}
+
+.mat-table  thead tr{ height: 35px;}
+
+.mat-table  thead tr th{ font-weight:  800;}

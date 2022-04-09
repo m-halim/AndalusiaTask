@@ -1,0 +1,115 @@
+$main-color:#0357a8;
+$white:#fff;
+
+.overlay{
+    z-index: 99999;
+}
+
+nav{
+    background-color: $white;
+    .width_logo{
+        width: 25%;
+    }
+    
+    form{
+        height: 33px;
+        input{
+            background: #e8f0f7;
+            font-size: 14px;
+        }
+        .search-icon{
+            border-bottom: none;
+            border-right: 0;
+            border-top: navajowhite;
+            border-radius: 0;
+            background: #e8f0f7;
+            border-width: 2px;
+            color: $main-color;
+            border-color: $main-color;
+            &:hover{
+                background: $main-color;
+                color: $white;
+            }
+        }
+    }
+    
+    .user{
+        justify-content: flex-end;
+    
+        select{
+        border: none;
+        color: #899cff;
+        background-image:none;
+        }
+    
+        .fa-caret-down{
+            left: -20px;
+            bottom: -10px;
+            position: relative;
+            color: #8b9cff;
+        }
+    
+        .user_img_name{
+            border-left: 1px solid #d2d6da;
+            span{
+                color: #8d949d;
+                font-size: 10px;
+            }
+        }
+    
+        @media (max-width:767px) {
+            justify-content: center;
+            padding-top: 20px;
+        }
+    }
+}
+
+.Breadcrumb{
+    background: $main-color;
+    color: $white;
+    border-radius: 4px;
+    
+    img{
+        height: 20px;
+        color: $white;
+    }
+
+    > span{
+        border-right: 1px solid #cfc9c9;
+        cursor: pointer;
+    }
+
+    .fa-house-chimney{
+        padding: 0 10px;
+        font-size: 15px;
+    }
+
+    .home{
+        color: $white;
+        font-size: 12px;
+        padding: 3px 7px;
+        line-height: 2;
+    }
+}
+
+
+.pages{
+    background: #fff;
+    border-radius: 5px;
+    position: absolute;
+    left: 15px;
+    right: 15px;
+    
+    img{width: 25px;}
+    .product{
+        a{
+            &:hover{
+                text-decoration: none;
+            }
+        }
+        div{
+            font-size: 14px;
+            color: #8d949d;
+        }
+    }
+}

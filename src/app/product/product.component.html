@@ -1,0 +1,124 @@
+<div class="container-fluid">
+    <h3 class="border-0  mb-1">product</h3>
+</div>
+<div class="container-fluid">
+    <div class="bkcolor pt-2 pb-5">
+        <div class="container">
+            <div class="basic_info">
+                <h3><i class="fa-solid fa-file-lines"></i> Basic Information</h3>
+                <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+                    <div class="form-row">
+        
+                        <div class="form-group col-md-4">
+                            <label>Warehouse <span class="required">*</span></label>
+                            <div class="select">
+                                <select #Warehouse formControlName="Warehouse" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.Warehouse.errors }">
+                                    <option value="2"> Warehouse 1</option>
+                                    <option value="3"> Warehouse 2</option>
+                                </select>
+                              </div>
+                        </div>
+        
+                        <div class="col-1"></div>
+        
+                        <div class="form-group col-md-4">
+                            <label>type <span class="required">*</span></label>
+                            <div class="select">
+                                <select (change)="checkproduct()" [attr.disabled]="Warehouse.value == '' ?  true: null " formControlName="type" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.type.errors }">
+                                  <option value="1"> Type A</option>
+                                  <option value="2"> Type B</option>
+                                  <option value="3"> Type C</option>
+                                </select>
+                              </div>
+                        </div>
+        
+                        <div class="col-1"></div>
+        
+                        <div class="form-group form-check col-md-2 text-center">
+                            <div class="zeropalance">
+                                <input type="checkbox" formControlName="zeropalance" id="zeropalance" class="form-check-input" [ngClass]="{ 'is-invalid': submitted && f.zeropalance.errors }" />
+                                <label for="zeropalance" class="form-check-label">Show Zero Balance</label>
+                            </div>
+                        </div>
+        
+                        <div class="form-group col-md-4">
+                            <label>Product Classification</label>
+                            <div class="d-flex Product_Classification">
+                                <div class="custom-control custom-radio pr-5">
+                                    <input id="all" type="radio" class="custom-control-input" value="1" name="checkproduct" formControlName="checkproduct" (change)="checkproduct()">
+                                    <label class="custom-control-label" for="all">All Products</label>
+                                    </div>
+                
+                                    <div class="custom-control custom-radio">
+                                    <input id="specific" type="radio" class="custom-control-input" value="2" name="checkproduct" formControlName="checkproduct" (change)="checkproduct()">
+                                    <label class="custom-control-label" for="specific">Specific product</label>
+                                </div>
+                            </div>
+                        </div>
+        
+                        <div class="col-1"></div>
+        
+                        <div class="form-group col-md-6" *ngIf="show">
+                            <label>product <span class="required">*</span></label>
+                            <ng-multiselect-dropdown
+                            formControlName="selectproduct"
+                            [placeholder]="'Please Select Product'"
+                            [settings]="dropdownSettings"
+                            [data]="dropdownList"
+                          >
+                          </ng-multiselect-dropdown>
+                        </div>
+        
+        
+                        <div class="col-12">
+                            <div class="text-right">
+                                <button [disabled]="productForm.invalid" type="submit" class="btn px-4">Search</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        
+            <div class="product_details">
+                <h3><i class="fa-solid fa-file-lines"></i> Product Details</h3>
+        
+                <mat-form-field appearance="standard">
+                    <mat-label>Filter</mat-label>
+                    <input matInput (keyup)="applyFilter($event)" placeholder="Search" #input>
+                </mat-form-field>
+        
+                <div class="mat-elevation-z8">
+                    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+                  
+                      <!-- product Column -->
+                      <ng-container matColumnDef="product">
+                        <th mat-header-cell *matHeaderCellDef> Product </th>
+                        <td mat-cell *matCellDef="let element"> {{element.product}} </td>
+                      </ng-container>
+                  
+                      <!-- onhand Column -->
+                      <ng-container matColumnDef="onhand">
+                        <th mat-header-cell *matHeaderCellDef> On hand </th>
+                        <td mat-cell *matCellDef="let element"> {{element.onhand}} </td>
+                      </ng-container>
+                  
+                      <!-- type Column -->
+                      <ng-container matColumnDef="type">
+                        <th mat-header-cell *matHeaderCellDef> Type </th>
+                        <td mat-cell *matCellDef="let element"> {{element.type}} </td>
+                      </ng-container>
+                  
+                      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    </table>
+                  
+                    <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                                   showFirstLastButtons 
+                                   aria-label="Select page of periodic elements">
+                    </mat-paginator>
+                  </div>
+            </div>    
+        </div>
+    </div>
+</div>
+

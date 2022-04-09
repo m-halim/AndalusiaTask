@@ -1,0 +1,123 @@
+.overlay {
+  z-index: 99999;
+}
+
+nav {
+  background-color: #fff;
+}
+
+nav .width_logo {
+  width: 25%;
+}
+
+nav form {
+  height: 33px;
+}
+
+nav form input {
+  background: #e8f0f7;
+  font-size: 14px;
+}
+
+nav form .search-icon {
+  border-bottom: none;
+  border-right: 0;
+  border-top: navajowhite;
+  border-radius: 0;
+  background: #e8f0f7;
+  border-width: 2px;
+  color: #0357a8;
+  border-color: #0357a8;
+}
+
+nav form .search-icon:hover {
+  background: #0357a8;
+  color: #fff;
+}
+
+nav .user {
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+nav .user select {
+  border: none;
+  color: #899cff;
+  background-image: none;
+}
+
+nav .user .fa-caret-down {
+  left: -20px;
+  bottom: -10px;
+  position: relative;
+  color: #8b9cff;
+}
+
+nav .user .user_img_name {
+  border-left: 1px solid #d2d6da;
+}
+
+nav .user .user_img_name span {
+  color: #8d949d;
+  font-size: 10px;
+}
+
+@media (max-width: 767px) {
+  nav .user {
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    padding-top: 20px;
+  }
+}
+
+.Breadcrumb {
+  background: #0357a8;
+  color: #fff;
+  border-radius: 4px;
+}
+
+.Breadcrumb img {
+  height: 20px;
+  color: #fff;
+}
+
+.Breadcrumb > span {
+  border-right: 1px solid #cfc9c9;
+  cursor: pointer;
+}
+
+.Breadcrumb .fa-house-chimney {
+  padding: 0 10px;
+  font-size: 15px;
+}
+
+.Breadcrumb .home {
+  color: #fff;
+  font-size: 12px;
+  padding: 3px 7px;
+  line-height: 2;
+}
+
+.pages {
+  background: #fff;
+  border-radius: 5px;
+  position: absolute;
+  left: 15px;
+  right: 15px;
+}
+
+.pages img {
+  width: 25px;
+}
+
+.pages .product a:hover {
+  text-decoration: none;
+}
+
+.pages .product div {
+  font-size: 14px;
+  color: #8d949d;
+}
+/*# sourceMappingURL=header.component.css.map */

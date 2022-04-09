@@ -1,0 +1,70 @@
+<!-- Navbar -->
+<nav [ngClass]="{'overlay': show }" class="navbar navbar-expand-lg navbar-light pb-0 mb-2">
+    <!-- Container wrapper -->
+    <div class="container-fluid p-0">
+      <!-- Navbar brand -->
+      <div class="row no-gutters">
+          <div class="col-md-6">
+              <div class="d-flex">
+                <a class="navbar-brand width_logo pt-0" routerLink="HomePage">
+                    <img class="img-fluid" src="../../assets/images/logo.png">
+                </a>
+                 
+              <!-- Search form -->
+                <form class="d-flex input-group w-75">
+                    <input
+                    type="search"
+                    class="form-control"
+                    placeholder="Search for patient (Name, code, phone number)"
+                    aria-label="Search"
+                    />
+                    <button class="btn btn-outline-primary search-icon" type="button">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </form>
+              </div>
+          </div>
+
+          <div class="col-md-6">
+              <div class="d-flex user">
+                <select class="form-select w-auto pr-4" aria-label="Default select example">
+                    <option value="EN" selected>English</option>
+                    <option value="AR">Arabic</option>
+                </select>
+                <i class="fa-solid fa-caret-down"></i>
+                <div class="user_img_name">
+                    <img class="img-fluid px-2" src="../../assets/images/user.png">
+                    <span>Sabry Farag Elsayed Mahmoud</span>
+                </div>
+              </div>
+          </div>
+      </div>
+      <!-- Collapsible wrapper -->
+    </div>
+    <!-- Container wrapper -->
+</nav>
+
+<div class="container-fluid">
+    <div [ngClass]="{'overlay': show }" [ngStyle]="{'position': show ? 'relative' : 'static'}" class="Breadcrumb px-2">
+        <span class="pr-1" (click)="showpages()">
+            <i class="fa-solid fa-bars"></i>
+        </span>
+        <div class="pl-1 d-inline-block">
+            <i class="fa-solid fa-house-chimney"></i>
+            <i class="fa-solid fa-angle-right"></i>
+            <a class="home" routerLink="HomePage">Home</a>
+        </div>
+    </div> 
+    <ng-template cdk-portal #overlayTemplate="cdkPortal"> </ng-template> 
+    <div [ngClass]="{'overlay': show }" class="pages p-2 mt-2" *ngIf="show">
+       
+        <div class="ml-5 product d-inline-block text-center" (click)="overlayRef.dispose();show = false">
+            <a routerLink="/product">
+            <img class="img-fluid" src="../../assets/images/admin.svg">
+                 <div>Product</div> 
+            </a>
+        </div>
+
+    </div>  
+</div>
+  <!-- Navbar -->  

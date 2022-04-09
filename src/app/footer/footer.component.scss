@@ -1,0 +1,10 @@
+$main-color:#0357a8;
+$white:#fff;
+
+.footer{
+    background-color: $main-color;
+    font-size: 11px;
+    border-radius: 4px;
+    
+    p{color: $white;}
+}
