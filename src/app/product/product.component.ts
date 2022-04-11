@@ -1,14 +1,10 @@
+import { MainService } from './../services/main.service';
+import { Item } from './../interfaces/item';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
-
-export interface Item {
-  onhand: string;
-  product: string;
-  type: string;
-}
 
 @Component({
   selector: 'app-product',
@@ -17,8 +13,8 @@ export interface Item {
 })
 export class ProductComponent implements OnInit , AfterViewInit {
 
-  displayedColumns: string[] = ['product', 'onhand', 'type'];
-  dataSource = new MatTableDataSource<Item>(ELEMENT_DATA);
+  displayedColumns: string[] = ['product', 'onhand', 'type' , 'creationDate'];
+  dataSource:any;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -29,8 +25,13 @@ export class ProductComponent implements OnInit , AfterViewInit {
   dropdownList = [];
   selectedItems = [];
   dropdownSettings = {};
-
-  constructor(private formBuilder: FormBuilder) { }
+  originalData = [];
+  selectproduct;
+  getProductVal;
+  constructor(
+    private formBuilder: FormBuilder,
+    public mainservice:MainService
+    ) { }
 
 ngOnInit() {
     this.productForm = this.formBuilder.group({
@@ -42,9 +43,12 @@ ngOnInit() {
         })
 
         this.dropdownList = [
-          { item_id: 1, item_text: 'Product 1' },
-          { item_id: 2, item_text: 'Product 2' },
-          { item_id: 3, item_text: 'Product 3' },
+          { item_id: 1,item_text: 'product 1' },
+          { item_id: 2,item_text: 'product 2' },
+          { item_id: 3,item_text: 'product 3' },
+          { item_id: 4,item_text: 'product 4' },
+          { item_id: 5,item_text: 'product 5' },
+          { item_id: 6,item_text: 'product 6' },
         ];
     
         this.dropdownSettings = {
@@ -56,6 +60,11 @@ ngOnInit() {
           itemsShowLimit: 3,
           allowSearchFilter: true
         };
+
+      this.mainservice.dataSource.subscribe( res => {
+        this.dataSource = new MatTableDataSource<Item>(res);
+        this.originalData = res
+      })
 }
 
 applyFilter(event: Event) {
@@ -81,6 +90,26 @@ onSubmit() {
     if (this.productForm.invalid) {
         return;
     }
+
+    let valtype = this.productForm.controls.type.value;
+    let valProduct = this.productForm.controls.selectproduct.value;
+
+     this.getProductVal = valProduct;
+    this.selectproduct = this.getProductVal.map(x => x['item_text'])
+    let filter = this.originalData;
+
+    if (this.show) {
+      let filters= filter.filter(res =>{
+        return this.selectproduct.some((item)=>{
+          if (valtype == res['type']){
+            return res['product'] == item;
+          }
+        })
+      });
+      this.dataSource = filters;
+    } else {
+      this.dataSource = this.originalData;
+    }
 }
 
 checkproduct(){
@@ -90,19 +119,14 @@ checkproduct(){
 
  if (Warehouse !== '' && type !== '' && checkproduct == 2) {
   this.show = true;
-  this.productForm.controls.selectproduct.setValidators(Validators.required)
+  this.productForm.controls.selectproduct.setValidators(Validators.required);
+  this.selectproduct = this.getProductVal;
  } else {
   this.show = false;
+  this.productForm.controls.selectproduct.clearValidators();
+  this.selectproduct = []
  }
 }
 }
 
-const ELEMENT_DATA: Item[] = [
-  {product: 'product 1', onhand: '123', type: 'Type A'},
-  {product: 'product 2', onhand: '123', type: 'Type B'},
-  {product: 'product 3', onhand: '123', type: 'Type C'},
-  {product: 'product 4', onhand: '123', type: 'Type B'},
-  {product: 'product 5', onhand: '123', type: 'Type B'},
-  {product: 'product 6', onhand: '123', type: 'Type C'},
-  {product: 'product 7', onhand: '123', type: 'Type A'},
-];
+
