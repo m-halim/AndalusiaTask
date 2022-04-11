@@ -93,12 +93,11 @@ onSubmit() {
 
     let valtype = this.productForm.controls.type.value;
     let valProduct = this.productForm.controls.selectproduct.value;
-
-     this.getProductVal = valProduct;
-    this.selectproduct = this.getProductVal.map(x => x['item_text'])
+    this.getProductVal = valProduct;
     let filter = this.originalData;
 
     if (this.show) {
+      this.selectproduct = this.getProductVal.map(x => x['item_text'])
       let filters= filter.filter(res =>{
         return this.selectproduct.some((item)=>{
           if (valtype == res['type']){
@@ -108,7 +107,11 @@ onSubmit() {
       });
       this.dataSource = filters;
     } else {
-      this.dataSource = this.originalData;
+      
+      let filtersAll = filter.filter(res =>{
+        return res['type'] == valtype
+      });
+      this.dataSource = filtersAll;
     }
 }
 
